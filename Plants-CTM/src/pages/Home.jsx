@@ -5,10 +5,14 @@ function Home() {
   return (
     <>
       <Hero />
+      <section className='py-5'>
       <Container className="my-5">
-        <h1></h1>
-        <p></p>
+        <h1>Quienes Somos</h1>
+        <h4>Kembang Tienda de plantas de exterior e interior, <br/> traemos todo el equipamiento para tus plantas en maceteros y cuidado vegetal,
+        <br/>Queremos que tu hogar se vea mas verda con nuestras plantas que dan vida.
+        </h4>
       </Container>
+      </section>
     </>
   );
 }

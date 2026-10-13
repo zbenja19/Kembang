@@ -5,8 +5,15 @@
 
 #root {
   min-height: 100vh;
-  background-color: #ffff;
+  background-color: #fff;
 }
+.added-modal__image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
 
 /*
 Contenido de Hero "../src/components/organisms/Hero.jsx"
@@ -32,4 +39,19 @@ Contenido de Hero "../src/components/organisms/Hero.jsx"
   margin-bottom: 20px;
   margin-left: auto;
   margin-right: auto;
+}
+.detail__image {
+  width: 100%;
+  max-height: 500px;
+  object-fit: contain;
+}
+.filters-card hr{
+  border-color: var(--border);
+  opacity: 1;
+}
+
+@media(max-width: 767px){
+    .filters-card{
+      margin-bottom: 1.5rem;
+    }
 }

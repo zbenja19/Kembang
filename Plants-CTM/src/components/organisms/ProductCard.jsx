@@ -5,7 +5,7 @@ import CardBody from '../molecules/CardBody';
 import { useNavigate } from 'react-router-dom';
 import "../../styles/organisms/ProductCard.css";
 
-function ProductCard({ product }) {
+function ProductCard({ product, onAgregar }) {
   const navigate = useNavigate();
 
   return (
@@ -19,13 +19,16 @@ function ProductCard({ product }) {
         title={product.name}
         description={product.description}
         price={product.price}
-        OriginalPrice={product.precioOriginal}
+        originalPrice={product.precioOriginal}
       >
         <Button
           variant="primary"
           onClick={() => navigate(`/products/${product.id}`)}
         >
           Ver detalles
+        </Button>
+        <Button variant="success" onClick={() => onAgregar(product)}>
+          Agregar al carrito
         </Button>
       </CardBody>
     </Card>

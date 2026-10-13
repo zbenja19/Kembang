@@ -1,4 +1,5 @@
 import {Form} from 'react-bootstrap';
+import '../../styles/atoms/CheckBox.css';
 
 export default function CheckBox({label, checked, onChange}) {
   return (

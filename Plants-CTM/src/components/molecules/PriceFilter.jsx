@@ -1,4 +1,6 @@
 import { Form} from 'react-bootstrap';
+import '../../styles/molecules/PriceFilter.css'
+
 export default function PriceFilter({ min , max, value, onChange }) {
 return ( 
     <div className="mb-4">

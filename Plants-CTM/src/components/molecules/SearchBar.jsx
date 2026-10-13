@@ -1,6 +1,6 @@
 import { InputGroup} from "react-bootstrap";
 import SearchInput from "../atoms/SearchInput";
-
+import '../../styles/molecules/SearchBar.css'
 export default function SearchBar({ value, onChange }) {
 return (
     <InputGroup className=" search-bar mb-3">
