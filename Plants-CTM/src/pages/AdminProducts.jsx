@@ -1,0 +1,1 @@
+import { useProducts } from '../context/ProductsContext';

@@ -1,13 +1,13 @@
 function PriceTag({price, OriginalPrice}) {
     return (
-        <span>
+        <div>
             {OriginalPrice && (
-                <span className="text-decoration-line text-muted me-2">
+                <div className="text-decoration-line text-muted me-2">
                     ${OriginalPrice}
-                </span>
+                </div>
             )}
-            <span className={OriginalPrice ? "text-danger fw_bold" : ""}>${price}</span>
-        </span>
+            <div className={OriginalPrice ? "text-danger fw_bold" : ""}>${price}</div>
+        </div>
     );
 } 
 
