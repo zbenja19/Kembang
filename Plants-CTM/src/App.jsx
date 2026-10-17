@@ -11,7 +11,7 @@ import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
 import ProductDetail from './pages/ProductDetail.jsx';
 import ShoppingCart from './pages/ShoppingCart.jsx';
-import Checkout from './pages/Checkout.jsx';
+import Checkout from './pages/CheckOut.jsx';
 import Admin from './pages/Admin.jsx';
 import AdminRoute from './components/AdminRoute.jsx';
 import './styles/global.css';
