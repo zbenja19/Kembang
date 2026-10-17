@@ -1,34 +1,20 @@
 import { Routes, Route } from 'react-router-dom';
 import { Toast, ToastContainer } from 'react-bootstrap';
+import { useState } from 'react';
 import NavBar from './components/organisms/Navbar';
+import Footer from './components/organisms/Footer.jsx';
+import CartModal from './components/organisms/cartModal.jsx';
 import Home from './pages/Home.jsx';
 import Products from './pages/Products';
 import Sales from './pages/Sales';
-import './styles/global.css';
-<<<<<<< HEAD
-
-
-function App() {
- return (
-   <>
-     <NavBar />
-     <Routes>
-       <Route path="/" element={<Home />} />
-       <Route path="/products" element={<Products />} />
-        <Route path="/Sales" element={<Sales />} />
-     </Routes>
-   </>
- );
-=======
-import Footer from "./components/organisms/Footer.jsx"
-import { useState } from "react"
-import ShoppingCart from "./pages/ShoppingCart.jsx"
-import Login from './pages/Login.jsx'
-import CartModal from './components/organisms/CartModal.jsx';
-import ProductDetail from './pages/ProductDetail.jsx';
-import AdminRoute from './components/AdminRoute.jsx';
-import Admin from './pages/Admin.jsx';
+import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
+import ProductDetail from './pages/ProductDetail.jsx';
+import ShoppingCart from './pages/ShoppingCart.jsx';
+import Checkout from './pages/CheckOut.jsx';
+import Admin from './pages/Admin.jsx';
+import AdminRoute from './components/AdminRoute.jsx';
+import './styles/global.css';
 
 function App() {
   const [productoAgregado, setProductoAgregado] = useState(null);
@@ -74,9 +60,7 @@ function App() {
 
     setCarrito((prev) =>
       prev
-        .map((i) =>
-          i.id === id ? { ...i, cantidad: i.cantidad + cambio } : i
-        )
+        .map((i) => (i.id === id ? { ...i, cantidad: i.cantidad + cambio } : i))
         .filter((i) => i.cantidad > 0)
     );
   };
@@ -84,6 +68,8 @@ function App() {
   const quitarDelCarrito = (id) => {
     setCarrito((prev) => prev.filter((item) => item.id !== id));
   };
+  
+  const vaciarCarrito = () => setCarrito([]);
 
   const totalItems = carrito.reduce((acc, item) => acc + item.cantidad, 0);
 
@@ -114,7 +100,12 @@ function App() {
                 onCambiarCantidad={cambiarCantidad}
                 onQuitar={quitarDelCarrito}
               />
+              
             }
+          />
+                    <Route
+            path='/checkout'
+            element={<Checkout carrito={carrito} onVaciar={vaciarCarrito} />}
           />
         </Routes>
       </main>
@@ -126,20 +117,8 @@ function App() {
         onClose={() => setProductoAgregado(null)}
       />
 
-
-      <ToastContainer
-        position="top-end"
-        containerPosition="fixed"
-        className="p-3"
-        style={{ zIndex: 1060 }}
-      >
-        <Toast
-          show={aviso !== null}
-          onClose={() => setAviso(null)}
-          delay={3000}
-          autohide
-          bg="warning"
-        >
+      <ToastContainer position="top-end" containerPosition="fixed" className="p-3" style={{ zIndex: 1060 }}>
+        <Toast show={aviso !== null} onClose={() => setAviso(null)} delay={3000} autohide bg="warning">
           <Toast.Header>
             <strong className="me-auto">🌿 Kembang</strong>
           </Toast.Header>
@@ -148,9 +127,6 @@ function App() {
       </ToastContainer>
     </div>
   );
->>>>>>> e447328 (registrar y product detail)
 }
 
-
 export default App;
-
