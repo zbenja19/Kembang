@@ -1,23 +1,34 @@
 import { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import products from '../data/products';
-import ProductCard from '../components/organisms/ProductCard';
+import { useProducts } from '../context/ProductsContext';
 import SearchBar from '../components/molecules/SearchBar';
 import CategoryFilter from '../components/molecules/CategoryFilter';
 import PriceFilter from '../components/molecules/PriceFilter';
+import ProductGrid from '../components/organisms/ProductGrid.jsx';
 
-function Products() {
-  const precios = products.map((p) => p.price);
+function Products({ onAgregar }) {
+  const { products } = useProducts();
+
+  // Aplica el descuento: el precio final queda en "price" y el original en "precioOriginal"
+  const productosConPrecio = products.map((p) =>
+    p.descuento > 0
+      ? {
+          ...p,
+          precioOriginal: p.price,
+          price: Math.round(p.price * (1 - p.descuento / 100)),
+        }
+      : p
+  );
+
+  const precios = productosConPrecio.map((p) => p.price);
   const minPrice = Math.floor(Math.min(...precios));
   const maxPrice = Math.ceil(Math.max(...precios));
-  
 
-  const [preciMax, setPrecioMax] = useState(maxPrice);
-
+  const [precioMax, setPrecioMax] = useState(maxPrice);
   const [busqueda, setBusqueda] = useState('');
   const [seleccionadas, setSeleccionadas] = useState([]);
 
-  const categorias =[ ...new Set(products.map((product) => product.categoria))];
+  const categorias = [...new Set(productosConPrecio.map((product) => product.categoria))];
 
   const toggleCategoria = (cat) => {
     setSeleccionadas((prev) =>
@@ -25,50 +36,41 @@ function Products() {
     );
   };
 
-
-  const filtrados = products.filter((product) =>{
-    const coincideNombre=product.name
-      .toLowerCase()
-      .includes(busqueda.toLowerCase());
+  const filtrados = productosConPrecio.filter((product) => {
+    const coincideNombre = product.name.toLowerCase().includes(busqueda.toLowerCase());
     const coincideCategoria =
       seleccionadas.length === 0 || seleccionadas.includes(product.categoria);
-    const coincidePrecio = product.price <= preciMax;  
+    const coincidePrecio = product.price <= precioMax;
     return coincideNombre && coincideCategoria && coincidePrecio;
+  });
 
-  }
-     
-   );
-
- return (
-   <Container className="my-5">
-     <h1>Productos</h1>
-     <SearchBar value={busqueda} onChange={setBusqueda}/>
-     <Row>
+  return (
+    <Container className="my-5">
+      <h1>Productos</h1>
+      <SearchBar value={busqueda} onChange={setBusqueda} />
+      <Row>
         <Col md={3}>
-          <PriceFilter
-            min={minPrice}
-            max={maxPrice}
-            value={preciMax}
-            onChange={setPrecioMax}
-          />
-          <CategoryFilter
-            categorias={categorias}
-            seleccionadas={seleccionadas}
-            onToggle={toggleCategoria}
-          />
+          <div className="filters-card">
+            <PriceFilter
+              min={minPrice}
+              max={maxPrice}
+              value={precioMax}
+              onChange={setPrecioMax}
+            />
+            <hr className="my-4" />
+            <CategoryFilter
+              categorias={categorias}
+              seleccionadas={seleccionadas}
+              onToggle={toggleCategoria}
+            />
+          </div>
         </Col>
         <Col md={9}>
-          <Row>
-            {filtrados.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))} 
-          </Row>
+          <ProductGrid products={filtrados} onAgregar={onAgregar} />
         </Col>
       </Row>
-   </Container>
- );
+    </Container>
+  );
 }
 
-
 export default Products;
-
