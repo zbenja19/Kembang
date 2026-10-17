@@ -3,7 +3,7 @@ import { Toast, ToastContainer } from 'react-bootstrap';
 import { useState } from 'react';
 import NavBar from './components/organisms/Navbar';
 import Footer from './components/organisms/Footer.jsx';
-import CartModal from './components/organisms/cartModal.jsx';
+import CartModal from "./components/organisms/CartModal.jsx";
 import Home from './pages/Home.jsx';
 import Products from './pages/Products';
 import Sales from './pages/Sales';
