@@ -35,3 +35,22 @@
   display: flex;
   flex-direction: column;
 }
+
+.products__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .products__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .products__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

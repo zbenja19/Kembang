@@ -8,6 +8,7 @@ export default function Hero() {
         <h1 className="hero__title">
           Descubre Lo Nuevo En Plantas.
         </h1>
+        <h5 className="hero__subtitle">Que tu hogar se vea mas verde.</h5>
       </div>
     </section>
   );

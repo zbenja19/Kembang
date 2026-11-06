@@ -12,6 +12,7 @@
 Contenido de Hero "../src/components/organisms/Hero.jsx"
 */
 .hero {
+  position: relative;
   min-height: 60vh;
   background-size: cover;
   background-position: center;
@@ -21,10 +22,34 @@ Contenido de Hero "../src/components/organisms/Hero.jsx"
   justify-content: center;
 }
 
-.hero__title {
-  color: #000;
-  text-align: center;
+.hero::before{
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
 }
+
+.hero__content{
+  position: relative;
+  z-index: 1;
+  padding: 0 1rem;
+}
+
+.hero__title {
+  color: #fff;
+  text-align: center;
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+}
+
+.hero__subtitle{
+  color: #fff;
+  text-align: center;
+  font-weight: 700;
+  font-size: clamp(1rem, 3vw, 2.5rem);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+  }
 
 .search-bar {
   max-width: 600px;
